@@ -34,6 +34,16 @@
 - Trip weather information
 
 
+### API Reference
+
+When running the application, the API reference is available here:
+
+- Swagger documentation at `/api/schema/swagger-ui/`
+![swagger screenshot](docs/images/swagger.png)
+
+- Redoc documentation at `/api/schema/redoc/`
+![redoc screenshot](docs/images/redoc.png)
+
 ### Development
 
 We use [pre-commit](https://pre-commit.com/) for linting. First time setup may be required:

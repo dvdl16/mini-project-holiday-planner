@@ -14,5 +14,5 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-  "black",
+  "drf-spectacular==0.27.2"
 ]
