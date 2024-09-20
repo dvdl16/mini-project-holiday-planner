@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "myproject"
+version = "1.0"
+dependencies = [
+    "Django==5.1.*",
+    "djangorestframework==3.15.*",
+    "django-filter==24.3",
+    "Markdown==3.7",
+]
+
+[project.optional-dependencies]
+dev = [
+  "black",
+]
