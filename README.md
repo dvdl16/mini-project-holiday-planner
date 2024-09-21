@@ -69,6 +69,10 @@ pre-commit install
 pre-commit run --all-files
 ```
 
+### Automated Tests
+
+Use the VSCode Launch Configuration called `Python Debugger: Run Integration Tests`, or run `python manage.py test`
+
 
 ### Limitations, known bugs, wishlist:
 

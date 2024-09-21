@@ -23,6 +23,17 @@
           "django": true,
           "justMyCode": true,
           "python": "${workspaceFolder}/.venv/bin/python",
+        },
+        {
+          "name": "Python Debugger: Run Integration Tests",
+          "type": "debugpy",
+          "request": "launch",
+          "cwd": "${workspaceFolder}/triptuner",
+          "program": "${workspaceFolder}/triptuner/manage.py",
+          "args": ["test"],
+          "django": true,
+          "justMyCode": true,
+          "python": "${workspaceFolder}/.venv/bin/python",
         }
       ]
 }
