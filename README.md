@@ -4,34 +4,43 @@
 
 - Django
   - Project was created with `django-admin startproject triptuner`
-
-
-### How to run?
-
-- Docker
-  - TBD
-- Locally
-  - Make sure Python `3.x` is installed with `python --version` or `python3 --version`
-  - Use `venv` with `python3 -m venv .venv` and activate it `source .venv/bin/activate` (Linux)
-  - Install the requirements with `pip install --editable .[dev]`
-  - To run:
-    - Use the VSCode Launch Configuration called `Python Debugger: Django`, or
-    - Run `python manage.py runserver`
+- Postgres
 
 
 ### Functionality
 
-- Destinations: Customers can select from a list of destinations. 
+- Destinations: 
     - Listing available destinations (e.g., countries, cities, landmarks).
     - Searching/filtering destinations by attributes (e.g., region, climate).
     - Retrieving detailed information about a selected destination.
 
-- Scheduling: The ability for users to define a travel schedule:
+- Travel Schedule:
     - Adding/removing destinations to/from a travel itinerary.
     - Determining the duration of stay at each location.
     - Saving and modifying an itinerary.
 
 - Trip weather information
+
+
+### How to run?
+
+- **Docker**
+  - Have Docker installed
+  - Run `docker compose up -d`
+  - Apply migrations with `docker compose run api python manage.py migrate`
+- **Locally**
+  - Make sure Python `3.x` is installed with `python --version` or `python3 --version`
+  - Use `venv` with `python3 -m venv .venv` and activate it with `source .venv/bin/activate` (Linux)
+  - Install the requirements with `pip install --editable .[dev]`
+  - To run:
+    - Use the VSCode Launch Configuration called `Python Debugger: Django`, or run `python manage.py runserver`
+    - Run migrations with the VSCode Launch Configuration called `Python Debugger: Run Migrations`, or run `python manage.py runserver migrate`
+  - *Note*: You also need a Postgres server and database for the app to function. Set these environment variables (or place these in a `.env` file in the project root directory)
+    - `POSTGRES_NAME`
+    - `POSTGRES_USER`
+    - `POSTGRES_PASSWORD`
+    - `POSTGRES_HOST`
+    - `POSTGRES_PORT`
 
 
 ### API Reference
@@ -43,6 +52,8 @@ When running the application, the API reference is available here:
 
 - Redoc documentation at `/api/schema/redoc/`
 ![redoc screenshot](docs/images/redoc.png)
+
+*Internet access is required to use these*
 
 ### Development
 
@@ -59,7 +70,7 @@ pre-commit run --all-files
 ```
 
 
-### Opportunities for improvement:
+### Limitations, known bugs, wishlist:
 
 - Use [uv](https://pypi.org/project/uv/) as package manager
   - I think this has a good chance of becoming the go-to package manager for future Python projects

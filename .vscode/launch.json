@@ -12,7 +12,17 @@
           "args": ["runserver"],
           "django": true,
           "justMyCode": true,
-          "python": "${workspaceFolder}/.venv/bin/python"
+          "python": "${workspaceFolder}/.venv/bin/python",
+        },
+        {
+          "name": "Python Debugger: Run Migrations",
+          "type": "debugpy",
+          "request": "launch",
+          "program": "${workspaceFolder}/triptuner/manage.py",
+          "args": ["migrate"],
+          "django": true,
+          "justMyCode": true,
+          "python": "${workspaceFolder}/.venv/bin/python",
         }
       ]
 }
