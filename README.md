@@ -11,7 +11,7 @@
 
 - Destinations: 
     - Listing available destinations (e.g., countries, cities, landmarks).
-    - Searching/filtering destinations by attributes (e.g., region, climate).
+    - Searching/filtering destinations by attributes.
     - Retrieving detailed information about a selected destination.
 
 - Travel Schedule:
@@ -45,6 +45,8 @@
 
 ### API Reference
 
+You can create user credentials with `python manage.py createsuperuser`.
+
 When running the application, the API reference is available here:
 
 - Swagger documentation at `/api/schema/swagger-ui/`
@@ -76,7 +78,8 @@ Use the VSCode Launch Configuration called `Python Debugger: Run Integration Tes
 
 ### Limitations, known bugs, wishlist:
 
-- Use [uv](https://pypi.org/project/uv/) as package manager
+- We should use [Token Authentication](https://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication) instead of basic authentication
+- We can use [uv](https://pypi.org/project/uv/) as package manager
   - I think this has a good chance of becoming the go-to package manager for future Python projects
   - Super fast and supports lockfiles (which makes depenedency tracking and vulnerability monitoring more robust)
 - Caching: Since weather data doesn’t change rapidly, we could cache results for a short duration to optimize API calls and reduce load on third-party APIs.

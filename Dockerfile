@@ -12,4 +12,4 @@ WORKDIR /app
 COPY pyproject.toml /app/
 RUN pip install --editable .[dev]
 
-COPY ./triptuner /app/
+COPY . /app/

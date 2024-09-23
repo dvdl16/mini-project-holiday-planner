@@ -20,11 +20,12 @@ from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework import routers
 
-from triptuner.triptuner.views import UserViewSet
+from triptuner.views import DestinationViewSet, UserViewSet
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r"users", UserViewSet)
+router.register(r"destinations", DestinationViewSet)
 
 # Wire up our API using automatic URL routing.
 urlpatterns = [
