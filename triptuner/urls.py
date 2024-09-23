@@ -20,7 +20,7 @@ from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework import routers
 
-from triptuner.views import DestinationViewSet, ItineraryViewSet, UserViewSet
+from triptuner.views import DestinationViewSet, ItineraryDestinationWeatherView, ItineraryViewSet, UserViewSet
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
@@ -45,5 +45,10 @@ urlpatterns = [
         "api/schema/redoc/",
         SpectacularRedocView.as_view(url_name="schema"),
         name="redoc",
+    ),
+    path(
+        "api/itineraries/<int:itinerary_id>/<int:itinerary_destination_order>/weather/",
+        ItineraryDestinationWeatherView.as_view(),
+        name="get_itinerary_destination_weather",
     ),
 ]

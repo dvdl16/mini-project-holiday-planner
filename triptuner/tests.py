@@ -1,10 +1,12 @@
 import json
 
+import requests_mock
 from django.contrib.auth.models import User
+from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from triptuner.models import Destination, Itinerary
+from triptuner.models import Destination, Itinerary, ItineraryDestination
 
 
 class UserTest(APITestCase):
@@ -154,3 +156,68 @@ class ItineraryTest(APITestCase):
         result = Itinerary.objects.get(name="Trip 1")
 
         self.assertEquals(result.destinations.all()[0].description, "A vast savanna rich in biodiversity.")
+
+
+class ItineraryDestinationWeatherViewTests(APITestCase):
+
+    def setUp(self):
+        # Set up some test data
+        self.destination = Destination.objects.create(name="Test City", type="city", latitude=51.5074, longitude=-0.1278)
+
+        self.itinerary = Itinerary.objects.create(
+            name="Test Itinerary",
+            description="Test itinerary description",
+            start_date="2024-09-20",
+            end_date="2024-09-25",
+        )
+
+        self.itinerary_destination = ItineraryDestination.objects.create(
+            itinerary=self.itinerary, destination=self.destination, visit_order=1
+        )
+
+    @requests_mock.Mocker()
+    def test_get_weather_success(self, mocker):
+        # Mock the Open-Meteo API response
+        mocker.get(
+            "https://api.open-meteo.com/v1/forecast",
+            json={"hourly": {"temperature_2m": [15.0, 16.0, 17.0]}},
+            status_code=200,
+        )
+
+        # Make request to the view
+        url = reverse(
+            "get_itinerary_destination_weather",
+            kwargs={
+                "itinerary_id": self.itinerary.id,
+                "itinerary_destination_order": self.itinerary_destination.visit_order,
+            },
+        )
+
+        response = self.client.get(url)
+
+        # Check that the response is successful and contains mocked weather data
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn("hourly", response.json())
+        self.assertIn("temperature_2m", response.json()["hourly"])
+
+    @requests_mock.Mocker()
+    def test_get_weather_missing_coordinates(self, mocker):
+        # Update destination to have no coordinates
+        self.destination.latitude = None
+        self.destination.longitude = None
+        self.destination.save()
+
+        # Make request to the view
+        url = reverse(
+            "get_itinerary_destination_weather",
+            kwargs={
+                "itinerary_id": self.itinerary.id,
+                "itinerary_destination_order": self.itinerary_destination.visit_order,
+            },
+        )
+
+        response = self.client.get(url)
+
+        # Check for a 400 error due to missing coordinates
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.json(), {"error": "Invalid coordinates for this destination"})
