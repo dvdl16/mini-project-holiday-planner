@@ -25,10 +25,10 @@ repos:
     rev: 24.8.0
     hooks:
       - id: black
-        args: [--line-length=200]
+        args: [--line-length=125]
 
   - repo: https://github.com/PyCQA/isort
     rev: 5.13.2
     hooks:
       - id: isort
-        args: ["--profile", "black", --line-length=200]
+        args: ["--profile", "black", --line-length=125]

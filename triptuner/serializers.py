@@ -37,6 +37,8 @@ class ItinerarySerializer(serializers.ModelSerializer):
         itinerary = Itinerary.objects.create(**validated_data)
 
         for destination in destinations:
-            ItineraryDestination.objects.create(itinerary=itinerary, destination=destination["destination"], visit_order=len(destinations))
+            ItineraryDestination.objects.create(
+                itinerary=itinerary, destination=destination["destination"], visit_order=len(destinations)
+            )
 
         return itinerary

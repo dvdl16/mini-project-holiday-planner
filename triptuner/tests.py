@@ -33,10 +33,18 @@ class DestinationTest(APITestCase):
     def setUp(self):
         # Create destinations. Dummy data provided by an LLM.
         self.destination1 = Destination.objects.create(
-            name="Nurnenharad", description="A volcanic wasteland south of Mordor, where slaves toil near the Sea of Núrnen.", type="poi", latitude=-38.0, longitude=63.5
+            name="Nurnenharad",
+            description="A volcanic wasteland south of Mordor, where slaves toil near the Sea of Núrnen.",
+            type="poi",
+            latitude=-38.0,
+            longitude=63.5,
         )
         self.destination1 = Destination.objects.create(
-            name="Galadorn", description="An ancient Elven stronghold hidden deep within the Ered Luin mountains.", type="city", latitude=-33.2, longitude=-23.1
+            name="Galadorn",
+            description="An ancient Elven stronghold hidden deep within the Ered Luin mountains.",
+            type="city",
+            latitude=-33.2,
+            longitude=-23.1,
         )
         self.user = User.objects.create_user(username="admin", is_staff=1, is_superuser=1)
 
@@ -75,7 +83,13 @@ class DestinationTest(APITestCase):
         """
         Ensure we can create a destination
         """
-        data = {"name": "Lothurien", "description": "A mystical forest land where time flows differently.", "type": "country", "latitude": -15.4, "longitude": 45.6}
+        data = {
+            "name": "Lothurien",
+            "description": "A mystical forest land where time flows differently.",
+            "type": "country",
+            "latitude": -15.4,
+            "longitude": 45.6,
+        }
         self.client.force_authenticate(user=self.user)
         response = self.client.post("/api/destinations/", data=data)
 
@@ -94,11 +108,17 @@ class DestinationTest(APITestCase):
 class ItineraryTest(APITestCase):
     def setUp(self):
         # Create destinations, dummy data provided by an LLM.
-        self.destination1 = Destination.objects.create(name="Kijani Plains", description="A vast savanna rich in biodiversity.", type="ecosystem", latitude=-2.515, longitude=37.761)
+        self.destination1 = Destination.objects.create(
+            name="Kijani Plains",
+            description="A vast savanna rich in biodiversity.",
+            type="ecosystem",
+            latitude=-2.515,
+            longitude=37.761,
+        )
 
         self.destination2 = Destination.objects.create(
             name="Mara Wetlands",
-            description="A critical wetland system supporting sustainable agriculture and protecting local communities from flooding.",
+            description="A critical wetland system supporting sustainable agriculture.",
             type="wetland",
             latitude=-1.317,
             longitude=34.763,
@@ -115,7 +135,10 @@ class ItineraryTest(APITestCase):
             "description": "A field trip for some ground truthing.",
             "start_date": "2024-09-23",
             "end_date": "2024-09-25",
-            "destinations": [{"destination": self.destination1.id, "visit_order": 1}, {"destination": self.destination2.id, "visit_order": 2}],
+            "destinations": [
+                {"destination": self.destination1.id, "visit_order": 1},
+                {"destination": self.destination2.id, "visit_order": 2},
+            ],
         }
 
         self.client.force_authenticate(user=self.user)

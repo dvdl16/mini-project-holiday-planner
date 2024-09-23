@@ -36,6 +36,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="itinerary",
             name="destinations",
-            field=models.ManyToManyField(related_name="itineraries", through="triptuner.ItineraryDestination", to="triptuner.destination"),
+            field=models.ManyToManyField(
+                related_name="itineraries", through="triptuner.ItineraryDestination", to="triptuner.destination"
+            ),
         ),
     ]
