@@ -15,9 +15,7 @@
     - Retrieving detailed information about a selected destination.
 
 - Travel Schedule:
-    - Adding/removing destinations to/from a travel itinerary.
-    - Determining the duration of stay at each location.
-    - Saving and modifying an itinerary.
+    - Adding destinations to/from a travel itinerary.
 
 - Trip weather information
 
