@@ -79,6 +79,7 @@ Use the VSCode Launch Configuration called `Python Debugger: Run Integration Tes
 ### Limitations, known bugs, wishlist:
 
 - We should use [Token Authentication](https://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication) instead of basic authentication
+- Itineraries can not be updated with `PUT` or `PATCH`
 - We can use [uv](https://pypi.org/project/uv/) as package manager
   - I think this has a good chance of becoming the go-to package manager for future Python projects
   - Super fast and supports lockfiles (which makes depenedency tracking and vulnerability monitoring more robust)

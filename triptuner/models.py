@@ -16,3 +16,26 @@ class Destination(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Itinerary(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    destinations = models.ManyToManyField("Destination", through="ItineraryDestination", related_name="itineraries")
+
+    def __str__(self):
+        return self.name
+
+
+class ItineraryDestination(models.Model):
+    itinerary = models.ForeignKey(Itinerary, on_delete=models.CASCADE)
+    destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
+    visit_order = models.PositiveIntegerField()
+
+    class Meta:
+        ordering = ["visit_order"]
+
+    def __str__(self):
+        return f"{self.itinerary.name} - {self.destination.name} (Order: {self.visit_order})"
